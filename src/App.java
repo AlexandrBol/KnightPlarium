@@ -8,6 +8,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.LinkedList;
 
+
+//TODO снятие денег, рефакторинг
+
 public class App {
 
     private JPanel ShopPane;
@@ -31,59 +34,79 @@ public class App {
     Knight knight = generator.getKnight();
     Inventory inventory = generator.getInventory();
     Shop shop = setShop.getShop();
-
+    Container InventoryButtonLayout = InventoryPane;
 
     public void ShopPanel() {
         ShopPane.setLayout(new GridLayout(10, 2));
         Container ShopButtonLayout;
         ShopButtonLayout = ShopPane;
 
-        LinkedList<Armor> a = shop.getShopArmors();
-        LinkedList<Weapon> w = shop.getShopWeapons();
+        LinkedList<Armor> shopArmors = shop.getShopArmors();
+        LinkedList<Weapon> shopWeapons = shop.getShopWeapons();
 
-        for (int i = 0; i < w.size(); i++) {
+        for (int i = 0; i < shopWeapons.size(); i++) {
             Button button = new Button();
-            button.setLabel(w.get(i).toString());
+            Button invButton = new Button();
+            button.setLabel(shopWeapons.get(i).toString());
             ShopButtonLayout.add(button);
             int finalI = i;
+            LinkedList<Weapon> wI = inventory.getInvWeapons();
             button.addActionListener(new ActionListener() {
                 int j = finalI;
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    shop.sellWeapon(j);
-                    System.out.println(inventory.toString());
+                    inventory.addWeapon(shopWeapons.get(j));
+                    invButton.setLabel(shopWeapons.get(j).toString());
+                    InventoryButtonLayout.add(invButton);
+                    invButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            System.out.println("You clicked button " + e.getSource().toString());
+                            inventory.EquipWeapon(wI.size()-1);
+                            KnightPanel();
+                        }
+                    });
+                    InventoryPane.revalidate();
+                    InventoryPane.repaint();
                 }
             });
         }
 
-        for (int i = 0; i < a.size(); i++) {
+        for (int i = 0; i < shopArmors.size(); i++) {
             Button button = new Button();
             Button invButton = new Button();
-            button.setLabel(a.get(i).toString());
+            button.setLabel(shopArmors.get(i).toString());
             ShopButtonLayout.add(button);
+
+            LinkedList<Armor> aI = inventory.getInvArmors();
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    shop.sellArmor(j);
+                    inventory.addArmor(shopArmors.get(j));
                     System.out.println("You clicked button " + e.getSource().toString());
-                    invButton.setLabel(a.get(j).toString());
-                    button.addActionListener(new ActionListener() {
-                        int j = finalI;
+                    invButton.setLabel(shopArmors.get(j).toString());
+                    InventoryButtonLayout.add(invButton);
+                    invButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             System.out.println("You clicked button " + e.getSource().toString());
-                            inventory.EquipArmor(j);
+                            inventory.EquipArmor(aI.size()-1);
                             KnightPanel();
                         }
+
                     });
+                    InventoryPane.revalidate();
+                    InventoryPane.repaint();
                 }
             });
         }
     }
 
-    Container InventoryButtonLayout = InventoryPane;
+
+
 
     public void InventoryPanel() {
         InventoryPane.setLayout(new GridLayout(10, 2));
