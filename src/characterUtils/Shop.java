@@ -13,16 +13,8 @@ public class Shop {
     private LinkedList<Weapon> ShopWeapons = new LinkedList<>();
     private LinkedList<Armor> ShopArmors = new LinkedList<>();
 
-    public void AddWeaponToShop(Weapon weapon){
-        ShopWeapons.add(weapon);
-    }
-
-    public void AddArmorToShop(Armor armor){
-        ShopArmors.add(armor);
-    }
 
     public int sellWeapon(int wID){
-        System.out.println( ShopWeapons.get(wID));
         Weapon w =ShopWeapons.get(wID);
         System.out.println(w);
         if(gold >= w.getPrice()){
@@ -54,22 +46,22 @@ public class Shop {
     public String toString() {
         System.out.println(ShopWeapons);
         System.out.println(ShopArmors);
-        return ",Yout gold gold=" + gold +"\n";//+
+        return "Your gold=" + gold +"\n";
+    }
+    public void AddWeaponToShop(Weapon weapon){
+        ShopWeapons.add(weapon);
+    }
+
+    public void AddArmorToShop(Armor armor){
+        ShopArmors.add(armor);
     }
 
     public LinkedList<Weapon> getShopWeapons() {
         return ShopWeapons;
     }
 
-    public void setShopWeapons(LinkedList<Weapon> shopWeapons) {
-        ShopWeapons = shopWeapons;
-    }
-
     public LinkedList<Armor> getShopArmors() {
         return ShopArmors;
     }
 
-    public void setShopArmors(LinkedList<Armor> shopArmors) {
-        ShopArmors = shopArmors;
-    }
 }

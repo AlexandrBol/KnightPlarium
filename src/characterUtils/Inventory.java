@@ -12,9 +12,19 @@ public class Inventory {
         this.knight = knight;
     }
 
-
     private LinkedList<Weapon> InvWeapons = new LinkedList<>();
     private LinkedList<Armor> InvArmors = new LinkedList<>();
+
+    public void EquipWeapon(int id) {
+        Weapon w = InvWeapons.get(id);
+        knight.addAttack(w);
+        InvWeapons.remove(id);
+    }
+
+    public void EquipArmor(int id) {
+        knight.addDefence(InvArmors.get(id));
+        InvArmors.remove(id);
+    }
 
     public void addArmor(Armor armor) {
         InvArmors.add(armor);
@@ -22,16 +32,6 @@ public class Inventory {
 
     public void addWeapon(Weapon weapon) {
         InvWeapons.add(weapon);
-    }
-
-    public void EquipWeapon(int id) {
-        knight.addAttack(InvWeapons.get(id));
-        InvWeapons.remove(id);
-    }
-
-    public void EquipArmor(int id) {
-        knight.addDefence(InvArmors.get(id));
-        InvArmors.remove(id);
     }
 
     public Knight getKnight() {
@@ -46,24 +46,14 @@ public class Inventory {
         return InvWeapons;
     }
 
-    public void setInvWeapons(LinkedList<Weapon> invWeapons) {
-        InvWeapons = invWeapons;
-    }
-
     public LinkedList<Armor> getInvArmors() {
         return InvArmors;
-    }
-
-    public void setInvArmors(LinkedList<Armor> invArmors) {
-        InvArmors = invArmors;
     }
 
     @Override
     public String toString() {
         System.out.println(InvWeapons);
         System.out.println(InvArmors);
-
-
         return
                 ", InvWeapons=" + InvWeapons +
                 ", InvArmors=" + InvArmors;

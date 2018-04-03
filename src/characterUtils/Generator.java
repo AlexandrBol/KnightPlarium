@@ -54,10 +54,11 @@ public class Generator {
         shop.AddArmorToShop(armor4);
         shop.AddArmorToShop(armor5);
 
-        inventory.addArmor(armor1);
-        inventory.addWeapon(weapon1);
-        knight.addAttack(weapon1);
-        knight.addDefence(armor1);
+        inventory.addArmor(armor2);
+        inventory.addWeapon(weapon2);
+
+//        knight.addAttack(weapon1);
+//        knight.addDefence(armor1);
     }
 
 }

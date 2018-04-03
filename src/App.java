@@ -2,6 +2,8 @@ import characterUtils.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.LinkedList;
@@ -19,23 +21,18 @@ public class App {
     private JLabel MoneyLabel;
     private JLabel EquipedArmorLabel;
     private JLabel EquipedWeapomLabel;
+
+
+    JFrame frame = new JFrame();
+
+
     Generator generator = new Generator();
-
-
     Knight knight = generator.getKnight();
     Inventory inventory = generator.getInventory();
     Shop shop = generator.getShop();
 
 
-    public App(){
-        generator.Generate();
-        tabbedPane1.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                super.componentResized(e);
-            }
-        });
-
+    public void ShopPanel() {
         ShopPane.setLayout(new GridLayout(10, 2));
         Container ShopButtonLayout;
         ShopButtonLayout = ShopPane;
@@ -47,13 +44,38 @@ public class App {
             Button button = new Button();
             button.setLabel(w.get(i).toString());
             ShopButtonLayout.add(button);
+            int finalI = i;
+            button.addActionListener(new ActionListener() {
+                int j = finalI;
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    shop.sellWeapon(j);
+                    System.out.println(inventory.toString());
+                    InventoryPanel();
+                }
+            });
         }
 
         for (int i = 0; i < a.size(); i++) {
             Button button = new Button();
             button.setLabel(a.get(i).toString());
             ShopButtonLayout.add(button);
+            int finalI = i;
+            button.addActionListener(new ActionListener() {
+                int j = finalI;
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    shop.sellArmor(j);
+                    System.out.println("You clicked button " + e.getSource().toString());
+                    InventoryPanel();
+                }
+            });
         }
+    }
+
+    public void InventoryPanel() {
         InventoryPane.setLayout(new GridLayout(10, 2));
         Container InventoryButtonLayout = InventoryPane;
         LinkedList<Weapon> wI = inventory.getInvWeapons();
@@ -63,23 +85,72 @@ public class App {
             Button button = new Button();
             button.setLabel(wI.get(i).toString());
             InventoryButtonLayout.add(button);
+            int finalI = i;
+            button.addActionListener(new ActionListener() {
+                int j = finalI;
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("You clicked button " + e.getSource().toString());
+                    InventoryPane.repaint();
+
+                    inventory.EquipWeapon(j);
+                    KnightPanel();
+                }
+            });
         }
 
         for (int i = 0; i < aI.size(); i++) {
             Button button = new Button();
             button.setLabel(aI.get(i).toString());
             InventoryButtonLayout.add(button);
-        }
+            int finalI = i;
+            button.addActionListener(new ActionListener() {
+                int j = finalI;
 
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("You clicked button " + e.getSource().toString());
+                    InventoryPane.repaint();
+                    inventory.EquipArmor(j);
+                    KnightPanel();
+                }
+            });
+        }
+    }
+
+    public void KnightPanel() {
         AttakLabel.setText("Attack = " + knight.getAttack());
         DefenceLabel.setText("Defence = " + knight.getDefense());
         MoneyLabel.setText("Money = " + knight.getMoney());
+        if (knight.getEquipedArmor() != null) {
+            EquipedArmorLabel.setText("Equiped Armor = " +
+                    "\n" + knight.getEquipedArmor().toString());
+        } else {
+            EquipedArmorLabel.setText("No Equiped Armor");
+        }
+        if (knight.getEquipedWeapon() != null) {
+            EquipedWeapomLabel.setText("Equiped Weapom =\n"
+                    + knight.getEquipedWeapon().toString());
+        } else {
+            EquipedWeapomLabel.setText("No Equiped Weapon");
+        }
+    }
 
-        EquipedArmorLabel.setText("Equiped Armor = " +
-                "\n" + knight.getEquipedArmor().toString());
-        EquipedWeapomLabel.setText("Equiped Weapom =\n"
-                + knight.getEquipedWeapon().toString());
 
+    public App() {
+        generator.Generate();
+        ShopPanel();
+        InventoryPanel();
+        KnightPanel();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        tabbedPane1.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+            }
+        });
 
 
     }

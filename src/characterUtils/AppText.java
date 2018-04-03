@@ -6,7 +6,8 @@ public class AppText {
     public static void main(String[] args) {
         Knight knight = new Knight(10, 15, 2000);
 
-
+        Inventory inventory = new Inventory(knight);
+        Shop shop = new Shop(knight.getMoney());
         //System.out.println(knight.toString());
 //        knight.addAttack(weapon);
 //        knight.addDefence(armor);
@@ -25,8 +26,7 @@ public class AppText {
         Weapon weapon5 = new Weapon("Knife5", 218, 456);
         Armor armor5 = new Armor("Shirt5", 143, 342);
 
-        Inventory inventory = new Inventory(knight);
-        Shop shop = new Shop(knight.getMoney());
+
 
         shop.AddWeaponToShop(weapon1);
         shop.AddWeaponToShop(weapon2);
@@ -41,35 +41,36 @@ public class AppText {
         shop.AddArmorToShop(armor4);
         shop.AddArmorToShop(armor5);
 
+//
+//        for (int i = 0; i < shop.getShopArmors().size() ; i++) {
+//
+//            System.out.printf(shop.getShopArmors().get(i).toString());
+//        //    btn = new JButton("btn"+ i);
+//
+//        }
 
-        for (int i = 0; i < shop.getShopArmors().size() ; i++) {
-
-            System.out.printf(shop.getShopArmors().get(i).toString());
-        //    btn = new JButton("btn"+ i);
-
-        }
-
-
+        inventory.addWeapon(weapon1);
 //        System.out.println("МАГАЗИН     " + shop.toString());
 //
-//        System.out.println("ИНВЕНТАРЬ   " + inventory.toString());
+       System.out.println("ИНВЕНТАРЬ   " + inventory.toString());
 
         //inventory.addWeapon(weapon1);
+        inventory.addWeapon(weapon1);
 
-
-        //TODO спряттать это все ->
-        int moneyW = shop.sellWeapon(2);
-        if (moneyW != knight.getMoney()) {
-            knight.setMoney(moneyW);
-            System.out.println(knight.getMoney());
-        }
-        int moneyA = shop.sellArmor(2);
-        if (moneyA != knight.getMoney()) {
-            knight.setMoney(moneyA);
-            System.out.println(knight.getMoney());
-        }
-        //TODO до сюда
-
+        System.out.println("ИНВЕНТАРЬ   " + inventory.toString());
+//        //TODO спряттать это все ->
+//        int moneyW = shop.sellWeapon(2);
+//        if (moneyW != knight.getMoney()) {
+//            knight.setMoney(moneyW);
+//            System.out.println(knight.getMoney());
+//        }
+//        int moneyA = shop.sellArmor(2);
+//        if (moneyA != knight.getMoney()) {
+//            knight.setMoney(moneyA);
+//            System.out.println(knight.getMoney());
+//        }
+//        //TODO до сюда
+//
 
 //        System.out.println("ИНВЕНТАРЬ   " + inventory.toString());
 //        shop.sellArmor(2);
