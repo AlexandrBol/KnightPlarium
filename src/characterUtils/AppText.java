@@ -7,7 +7,7 @@ public class AppText {
         Knight knight = new Knight(10, 15, 2000);
 
         Inventory inventory = new Inventory(knight);
-        Shop shop = new Shop(knight.getMoney());
+        Shop shop = new Shop();
         //System.out.println(knight.toString());
 //        knight.addAttack(weapon);
 //        knight.addDefence(armor);

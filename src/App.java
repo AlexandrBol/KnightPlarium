@@ -27,9 +27,10 @@ public class App {
 
 
     Generator generator = new Generator();
+    SetShop setShop = new SetShop();
     Knight knight = generator.getKnight();
     Inventory inventory = generator.getInventory();
-    Shop shop = generator.getShop();
+    Shop shop = setShop.getShop();
 
 
     public void ShopPanel() {
@@ -47,7 +48,6 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     shop.sellWeapon(j);
@@ -64,7 +64,6 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     shop.sellArmor(j);
@@ -92,10 +91,10 @@ public class App {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You clicked button " + e.getSource().toString());
-                    InventoryPane.repaint();
-
                     inventory.EquipWeapon(j);
                     KnightPanel();
+                    InventoryPane.updateUI();
+                  //  InventoryPanel();//AAAAAAAA
                 }
             });
         }
@@ -107,12 +106,13 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You clicked button " + e.getSource().toString());
-                    InventoryPane.repaint();
                     inventory.EquipArmor(j);
+                    InventoryPane.updateUI();
+                    //sInventoryPanel();//ОБНОВЛЯТЬ ПОСТОЯННО
+
                     KnightPanel();
                 }
             });
@@ -140,6 +140,7 @@ public class App {
 
     public App() {
         generator.Generate();
+        setShop.Generate();
         ShopPanel();
         InventoryPanel();
         KnightPanel();

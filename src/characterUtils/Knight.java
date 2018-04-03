@@ -6,6 +6,7 @@ package characterUtils;
 public class Knight {
     private int attack;
     private int defense;
+
     int money;
 
     Inventory inventory;
@@ -20,8 +21,8 @@ public class Knight {
             setAttack(getAttack() + weapon.getWeaponAttack());
             equipedWeapon = weapon;
         } else {
-            inventory.addWeapon(equipedWeapon);
-            setAttack(getAttack() + weapon.getWeaponAttack() - equipedWeapon.getWeaponAttack());
+           // inventory.addWeapon(equipedWeapon);
+            setAttack(getAttack() + weapon.getWeaponAttack()-equipedWeapon.getWeaponAttack());
             equipedWeapon = weapon;
         }
     }
@@ -31,8 +32,8 @@ public class Knight {
             setDefense(getDefense() + armor.getArmorDefence());
             equipedArmor = armor;
         } else {
-            inventory.addArmor(equipedArmor);
-            setDefense(getDefense() + armor.getArmorDefence() - equipedArmor.getArmorDefence());
+          //  inventory.addArmor(equipedArmor);
+            setDefense(getDefense() + armor.getArmorDefence()-equipedArmor.getArmorDefence());
             equipedArmor = armor;
         }
     }

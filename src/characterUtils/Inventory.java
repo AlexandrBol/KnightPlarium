@@ -8,22 +8,21 @@ public class Inventory {
 
     Knight knight;
     public Inventory(Knight knight) {
-
         this.knight = knight;
     }
 
     private LinkedList<Weapon> InvWeapons = new LinkedList<>();
     private LinkedList<Armor> InvArmors = new LinkedList<>();
 
+
+
     public void EquipWeapon(int id) {
-        Weapon w = InvWeapons.get(id);
-        knight.addAttack(w);
-        InvWeapons.remove(id);
+        System.out.println(InvWeapons.get(id));
+        knight.addAttack(InvWeapons.get(id));
     }
 
     public void EquipArmor(int id) {
         knight.addDefence(InvArmors.get(id));
-        InvArmors.remove(id);
     }
 
     public void addArmor(Armor armor) {
@@ -32,14 +31,6 @@ public class Inventory {
 
     public void addWeapon(Weapon weapon) {
         InvWeapons.add(weapon);
-    }
-
-    public Knight getKnight() {
-        return knight;
-    }
-
-    public void setKnight(Knight knight) {
-        this.knight = knight;
     }
 
     public LinkedList<Weapon> getInvWeapons() {
