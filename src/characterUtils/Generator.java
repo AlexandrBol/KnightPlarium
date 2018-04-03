@@ -1,6 +1,7 @@
 package characterUtils;
 
 public class Generator {
+
     Knight knight = new Knight(10, 15, 2000);
     Inventory inventory = new Inventory(knight);
 
@@ -42,8 +43,6 @@ public class Generator {
         inventory.addArmor(armor4);
         inventory.addWeapon(weapon4);
 
-//        knight.addAttack(weapon1);
-//        knight.addDefence(armor1);
     }
 
 }

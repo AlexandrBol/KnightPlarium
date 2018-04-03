@@ -1,16 +1,10 @@
 package characterUtils;
-//the main character with basic indicators (attack and defense);
-// Уровень персонажа ???????
-
 
 public class Knight {
     private int attack;
     private int defense;
 
     int money;
-
-    Inventory inventory;
-
 
     private Weapon equipedWeapon;
     private Armor equipedArmor;
@@ -19,22 +13,20 @@ public class Knight {
     public void addAttack(Weapon weapon) {
         if (equipedWeapon == null) {
             setAttack(getAttack() + weapon.getWeaponAttack());
-            equipedWeapon = weapon;
+            setEquipedWeapon(weapon);
         } else {
-           // inventory.addWeapon(equipedWeapon);
-            setAttack(getAttack() + weapon.getWeaponAttack()-equipedWeapon.getWeaponAttack());
-            equipedWeapon = weapon;
+            setAttack(getAttack() + weapon.getWeaponAttack() - equipedWeapon.getWeaponAttack());
+            setEquipedWeapon(weapon);
         }
     }
 
     public void addDefence(Armor armor) {
         if (equipedArmor == null) {
             setDefense(getDefense() + armor.getArmorDefence());
-            equipedArmor = armor;
+            setEquipedArmor(armor);
         } else {
-          //  inventory.addArmor(equipedArmor);
-            setDefense(getDefense() + armor.getArmorDefence()-equipedArmor.getArmorDefence());
-            equipedArmor = armor;
+            setDefense(getDefense() + armor.getArmorDefence() - equipedArmor.getArmorDefence());
+            setEquipedArmor(armor);
         }
     }
 

@@ -13,27 +13,27 @@ public class Shop {
 
 
     public void sellWeapon(int wID) {
-        Weapon w = ShopWeapons.get(wID);
-        System.out.println(w);
-        if (gold >= w.getPrice()) {
-            inventory.addWeapon(w);
-            System.out.println("Weapon buy succ");
-            knight.setMoney(gold - w.getPrice());
-        } else {
-            System.out.println("You have enough money for this weapon");
-        }
+//        Weapon w = ShopWeapons.get(wID);
+//        System.out.println(w);
+//        if (gold >= w.getPrice()) {
+        inventory.addWeapon(ShopWeapons.get(wID));
+//            System.out.println("Weapon buy succ");
+//            knight.setMoney(gold - w.getPrice());
+//        } else {
+//            System.out.println("You have enough money for this weapon");
+//        }
     }
 
     public void sellArmor(int aID) {
-        System.out.println(gold);
-        Armor a = ShopArmors.get(aID);
-        if (gold >= a.getPrice()) {
-            inventory.addArmor(a);
-            System.out.println("Armor buy succ");
-            knight.setMoney(gold - a.getPrice());
-        } else {
-            System.out.println("You have enough money for this weapon");
-        }
+//        System.out.println(gold);
+//        Armor a = ShopArmors.get(aID);
+//        if (gold >= a.getPrice()) {
+        inventory.addArmor(ShopArmors.get(aID));
+//            System.out.println("Armor buy succ");
+//            knight.setMoney(gold - a.getPrice());
+//        } else {
+//            System.out.println("You have enough money for this weapon");
+//        }
     }
 
     @Override

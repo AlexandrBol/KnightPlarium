@@ -52,13 +52,13 @@ public class App {
                 public void actionPerformed(ActionEvent e) {
                     shop.sellWeapon(j);
                     System.out.println(inventory.toString());
-                    InventoryPanel();
                 }
             });
         }
 
         for (int i = 0; i < a.size(); i++) {
             Button button = new Button();
+            Button invButton = new Button();
             button.setLabel(a.get(i).toString());
             ShopButtonLayout.add(button);
             int finalI = i;
@@ -68,15 +68,25 @@ public class App {
                 public void actionPerformed(ActionEvent e) {
                     shop.sellArmor(j);
                     System.out.println("You clicked button " + e.getSource().toString());
-                    InventoryPanel();
+                    invButton.setLabel(a.get(j).toString());
+                    button.addActionListener(new ActionListener() {
+                        int j = finalI;
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            System.out.println("You clicked button " + e.getSource().toString());
+                            inventory.EquipArmor(j);
+                            KnightPanel();
+                        }
+                    });
                 }
             });
         }
     }
 
+    Container InventoryButtonLayout = InventoryPane;
+
     public void InventoryPanel() {
         InventoryPane.setLayout(new GridLayout(10, 2));
-        Container InventoryButtonLayout = InventoryPane;
         LinkedList<Weapon> wI = inventory.getInvWeapons();
         LinkedList<Armor> aI = inventory.getInvArmors();
 
@@ -87,14 +97,11 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You clicked button " + e.getSource().toString());
                     inventory.EquipWeapon(j);
                     KnightPanel();
-                    InventoryPane.updateUI();
-                  //  InventoryPanel();//AAAAAAAA
                 }
             });
         }
@@ -110,9 +117,6 @@ public class App {
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You clicked button " + e.getSource().toString());
                     inventory.EquipArmor(j);
-                    InventoryPane.updateUI();
-                    //sInventoryPanel();//ОБНОВЛЯТЬ ПОСТОЯННО
-
                     KnightPanel();
                 }
             });

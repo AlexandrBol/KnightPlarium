@@ -1,6 +1,7 @@
 package characterUtils;
 
 public class SetShop {
+
     Shop shop = new Shop();
     Weapon weapon1 = new Weapon("Knife1", 21, 150);
     Weapon weapon2 = new Weapon("Knife2", 212, 80);

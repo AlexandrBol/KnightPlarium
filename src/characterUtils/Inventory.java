@@ -3,17 +3,18 @@ package characterUtils;
 import java.util.LinkedList;
 
 public class Inventory {
+
     public Inventory() {
     }
 
     Knight knight;
+
     public Inventory(Knight knight) {
         this.knight = knight;
     }
 
     private LinkedList<Weapon> InvWeapons = new LinkedList<>();
     private LinkedList<Armor> InvArmors = new LinkedList<>();
-
 
 
     public void EquipWeapon(int id) {
@@ -47,6 +48,6 @@ public class Inventory {
         System.out.println(InvArmors);
         return
                 ", InvWeapons=" + InvWeapons +
-                ", InvArmors=" + InvArmors;
+                        ", InvArmors=" + InvArmors;
     }
 }
