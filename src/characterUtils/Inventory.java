@@ -21,7 +21,6 @@ public class Inventory {
         System.out.println(InvWeapons.get(id));
         knight.addAttack(InvWeapons.get(id));
     }
-
     public void EquipArmor(int id) {
         knight.addDefence(InvArmors.get(id));
     }

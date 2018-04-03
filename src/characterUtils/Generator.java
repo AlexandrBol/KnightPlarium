@@ -38,10 +38,7 @@ public class Generator {
 
         inventory.addArmor(armor2);
         inventory.addWeapon(weapon2);
-        inventory.addArmor(armor3);
-        inventory.addWeapon(weapon3);
-        inventory.addArmor(armor4);
-        inventory.addWeapon(weapon4);
+
 
     }
 
