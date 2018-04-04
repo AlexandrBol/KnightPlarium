@@ -52,7 +52,6 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (knight.getMoney() >= shopWeapons.get(j).getPrice()) {
@@ -146,6 +145,7 @@ public class App {
     }
 
     public void KnightPanel() {
+
         AttakLabel.setText("Attack = " + knight.getAttack());
         DefenceLabel.setText("Defence = " + knight.getDefense());
         MoneyLabel.setText("Money = " + knight.getMoney());
