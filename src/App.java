@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-//TODO снятие денег, рефакторинг
+//TODO  рефакторинг
 
 public class App {
 
@@ -37,7 +38,7 @@ public class App {
     Container InventoryButtonLayout = InventoryPane;
 
     public void ShopPanel() {
-        ShopPane.setLayout(new GridLayout(10, 2));
+        ShopPane.setLayout(new GridLayout(11, 2));
         Container ShopButtonLayout;
         ShopButtonLayout = ShopPane;
 
@@ -46,66 +47,62 @@ public class App {
 
         for (int i = 0; i < shopWeapons.size(); i++) {
             Button button = new Button();
-            Button invButton = new Button();
             button.setLabel(shopWeapons.get(i).toString());
             ShopButtonLayout.add(button);
             int finalI = i;
-            LinkedList<Weapon> wI = inventory.getInvWeapons();
             button.addActionListener(new ActionListener() {
                 int j = finalI;
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    inventory.addWeapon(shopWeapons.get(j));
-                    invButton.setLabel(shopWeapons.get(j).toString());
-                    InventoryButtonLayout.add(invButton);
-                    invButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-
-                            System.out.println("You clicked button " + e.getSource().toString());
-                            inventory.EquipWeapon(wI.size()-1);
-                            KnightPanel();
-                        }
-                    });
-                    InventoryPane.revalidate();
-                    InventoryPane.repaint();
+                    if (knight.getMoney() >= shopWeapons.get(j).getPrice()) {
+                        knight.setMoney(knight.getMoney() - shopWeapons.get(j).getPrice());
+                        inventory.addWeapon(shopWeapons.get(j));
+                        InventoryPane.removeAll();
+                        InventoryPanel();
+                        InventoryPane.revalidate();
+                        InventoryPane.repaint();
+                    } else {
+                        Label enoughMoney = new Label();
+                        enoughMoney.setText("You have not enough money");
+                        ShopButtonLayout.add(enoughMoney);
+                        ShopPane.revalidate();
+                        ShopPane.repaint();
+                    }
+                    KnightPanel();
                 }
             });
         }
 
         for (int i = 0; i < shopArmors.size(); i++) {
             Button button = new Button();
-            Button invButton = new Button();
             button.setLabel(shopArmors.get(i).toString());
             ShopButtonLayout.add(button);
-
-            LinkedList<Armor> aI = inventory.getInvArmors();
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    inventory.addArmor(shopArmors.get(j));
-                    System.out.println("You clicked button " + e.getSource().toString());
-                    invButton.setLabel(shopArmors.get(j).toString());
-                    InventoryButtonLayout.add(invButton);
-                    invButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            System.out.println("You clicked button " + e.getSource().toString());
-                            inventory.EquipArmor(aI.size()-1);
-                            KnightPanel();
-                        }
-
-                    });
-                    InventoryPane.revalidate();
-                    InventoryPane.repaint();
+                    if (knight.getMoney() >= shopArmors.get(j).getPrice()) {
+                        knight.setMoney(knight.getMoney() - shopArmors.get(j).getPrice());
+                        inventory.addArmor(shopArmors.get(j));
+                        InventoryPane.removeAll();
+                        InventoryPanel();
+                        InventoryPane.revalidate();
+                        InventoryPane.repaint();
+                    } else {
+                        Label enoughMoney = new Label();
+                        enoughMoney.setText("You have not enough money");
+                        ShopButtonLayout.add(enoughMoney);
+                        ShopPane.revalidate();
+                        ShopPane.repaint();
+                    }
+                    KnightPanel();
                 }
             });
         }
     }
-
-
 
 
     public void InventoryPanel() {
@@ -120,6 +117,7 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You clicked button " + e.getSource().toString());
@@ -136,6 +134,7 @@ public class App {
             int finalI = i;
             button.addActionListener(new ActionListener() {
                 int j = finalI;
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("You clicked button " + e.getSource().toString());
